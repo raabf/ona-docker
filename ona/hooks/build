@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# $IMAGE_NAME var is injected into the build so the tag is correct.
+
+echo "--build hook called--"
+echo "build hook: IMAGE_NAME '$IMAGE_NAME'"
+echo "build hook: DOCKERFILE_PATH '$DOCKERFILE_PATH'"
+
+PHP_VERSION_DEFAULT="7.1"
+
+# extracts the PHP version and the ONA version from the docker-tag
+# the format must be `[ONA]-php[PHP]` or `[ONA]`
+#  + master-php7
+#  + v18.1.1-php7.2
+#  + v18.1.1
+PHP_INCLUDED="$(echo $CACHE_TAG | sed 's,[^\-]*\-\(php\).*,\1,')"
+echo "build hook: PHP_INCLUDED '$PHP_INCLUDED'"
+PHP_VERSION="$(echo $CACHE_TAG | sed 's,[^\-]*\-php\([^\-]*\).*,\1,')"
+echo "build hook: PHP_VERSION '$PHP_VERSION'"
+ONA_VERSION="$(echo $CACHE_TAG | sed 's,\([^\-]*\).*,\1,')"
+echo "build hook: ONA_VERSION '$ONA_VERSION'"
+
+BUILD_ARGS=""
+
+if [ "$PHP_INCLUDED" == "php" ]; then
+    BUILD_ARGS="$BUILD_ARGS --build-arg PHP_VERSION='$PHP_VERSION'"
+fi
+
+docker build --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+            --build-arg VCS_REF=$(git rev-parse --short HEAD) \
+            ${BUILD_ARGS} \
+            --build-arg ONA_VERSION="$ONA_VERSION" \
+            -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+
