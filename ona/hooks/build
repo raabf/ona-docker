@@ -5,6 +5,7 @@
 echo "--build hook called--"
 echo "build hook: IMAGE_NAME '$IMAGE_NAME'"
 echo "build hook: DOCKERFILE_PATH '$DOCKERFILE_PATH'"
+echo "build hook: CACHE_TAG '$CACHE_TAG'"
 
 PHP_VERSION_DEFAULT="7.1"
 
