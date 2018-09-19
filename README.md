@@ -34,7 +34,7 @@ OpenNetAdmin provides a database managed inventory of your IP network. Each subn
  + Plugin system to extend functionality
  + Audit managed subnets and discover new IPs
  + Manage DNS and DHCP server configs, archive host configs
- + And much more …
+ + [And much more …](http://opennetadmin.com/features.html)
 
 [![Display Host Screenshot](http://opennetadmin.com/images/display_host.png)](http://opennetadmin.com/features.html)
 
