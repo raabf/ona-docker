@@ -14,11 +14,13 @@ PHP_VERSION_DEFAULT="7.1"
 #  + master-php7
 #  + v18.1.1-php7.2
 #  + v18.1.1
-PHP_INCLUDED="$(echo $CACHE_TAG | sed 's,[^\-]*\-\(php\).*,\1,')"
+# There seems to be a bug and $CACHE_TAG is empty. Thats why we use $IMAGE_NAME
+# here. See https://forums.docker.com/t/build-env-var-cache-tag-not-passed-to-post-push-hook/41747
+PHP_INCLUDED="$(echo '$IMAGE_NAME' | sed 's,[^:]*:[^\-]*\-\(php\).*,\1,')"
 echo "build hook: PHP_INCLUDED '$PHP_INCLUDED'"
-PHP_VERSION="$(echo $CACHE_TAG | sed 's,[^\-]*\-php\([^\-]*\).*,\1,')"
+PHP_VERSION="$(echo '$IMAGE_NAME' | sed 's,[^:]*:[^\-]*\-php\([^\-]*\).*,\1,')"
 echo "build hook: PHP_VERSION '$PHP_VERSION'"
-ONA_VERSION="$(echo $CACHE_TAG | sed 's,\([^\-]*\).*,\1,')"
+ONA_VERSION="$(echo '$IMAGE_NAME' | sed 's,[^:]*:\([^\-]*\).*,\1,')"
 echo "build hook: ONA_VERSION '$ONA_VERSION'"
 
 BUILD_ARGS=""
