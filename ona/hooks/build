@@ -8,7 +8,6 @@ echo "build hook: DOCKERFILE_PATH '$DOCKERFILE_PATH'"
 echo "build hook: CACHE_TAG '$CACHE_TAG'"
 echo "build hook: DOCKER_TAG '$DOCKER_TAG'"
 echo "build hook: DOCKER_REPO '$DOCKER_REPO'"
-echo "build hook: SOURCE_COMMIT '$SOURCE_COMMIT'"
 echo "build hook: SOURCE_BRANCH '$SOURCE_BRANCH'"
 echo "build hook: SOURCE_COMMIT '$SOURCE_COMMIT'"
 
@@ -19,22 +18,24 @@ echo "build hook: SOURCE_COMMIT '$SOURCE_COMMIT'"
 #  + v18.1.1
 # There seems to be a bug and $CACHE_TAG is empty. Thats why we use $IMAGE_NAME
 # here. See https://forums.docker.com/t/build-env-var-cache-tag-not-passed-to-post-push-hook/41747
-PHP_INCLUDED="$(echo "$IMAGE_NAME" | sed 's,[^:]*:[^\-]*\-\(php\).*,\1,')"
-echo "build hook: PHP_INCLUDED '$PHP_INCLUDED'"
+php_included="$(echo "$IMAGE_NAME" | sed 's,[^:]*:[^\-]*\-\(php\).*,\1,')"
+echo "build hook: php_included '$php_included'"
+
 PHP_VERSION="$(echo "$IMAGE_NAME" | sed 's,[^:]*:[^\-]*\-php\([^\-]*\).*,\1,')"
 echo "build hook: PHP_VERSION '$PHP_VERSION'"
+
 ONA_VERSION="$(echo "$IMAGE_NAME" | sed 's,[^:]*:\([^\-]*\).*,\1,')"
 echo "build hook: ONA_VERSION '$ONA_VERSION'"
 
-BUILD_ARGS=""
+build_args=''
 
-if [ "$PHP_INCLUDED" == "php" ]; then
-    BUILD_ARGS="$BUILD_ARGS --build-arg PHP_VERSION='$PHP_VERSION'"
+if [ "$php_included" == "php" ]; then
+    build_args=(${build_args} --build-arg PHP_VERSION="$PHP_VERSION")
 fi
 
 docker build --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
             --build-arg VCS_REF=$(git rev-parse --short HEAD) \
-            ${BUILD_ARGS} \
+            ${build_args[@]} \
             --build-arg ONA_VERSION="$ONA_VERSION" \
             -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 

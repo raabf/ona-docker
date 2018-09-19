@@ -6,7 +6,6 @@ echo "post_push: DOCKERFILE_PATH '$DOCKERFILE_PATH'"
 echo "post_push: CACHE_TAG '$CACHE_TAG'"
 echo "post_push: DOCKER_TAG '$DOCKER_TAG'"
 echo "post_push: DOCKER_REPO '$DOCKER_REPO'"
-echo "post_push: SOURCE_COMMIT '$SOURCE_COMMIT'"
 echo "post_push: SOURCE_BRANCH '$SOURCE_BRANCH'"
 echo "post_push: SOURCE_COMMIT '$SOURCE_COMMIT'"
 
@@ -22,7 +21,7 @@ echo "post_push: use alias list '${aliasmap[$DOCKER_TAG]}'"
 
 for aliastag in ${array[@]}; do
     
-    echo "post_push: tag and push '$aliastag'"
+    echo "post_push: tag and push '$IMAGE_NAME' with '$aliastag'"
     docker tag $IMAGE_NAME $DOCKER_REPO:$aliastag
     docker push $DOCKER_REPO:$aliastag
 
