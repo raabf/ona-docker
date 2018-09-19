@@ -21,7 +21,7 @@ LABEL maintainer="Fabian Raab <fabian@raab.link>" \
       org.label-schema.description="OpenNetAdmin (ONA) IP Address Management (IPAM) tool" \
       org.label-schema.url="http://opennetadmin.com/" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://gitlab.com/raabf/ona-docker" \
+      org.label-schema.vcs-url="https://github.com/raabf/ona-docker.git" \
       org.label-schema.docker.cmd="TODO" \
       org.label-schema.schema-version="1.0"
 

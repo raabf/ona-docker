@@ -13,8 +13,8 @@ declare -A aliasmap
 
 aliasmap["v17.12.22-php5"]="v17.12.22"
 aliasmap["v18.1.1-php5"]="v18.1.1 latest"
-aliasmap["master-php5"]="master testing"
-aliasmap["develop-php5"]="develop"
+aliasmap["master-php7.0"]="master testing"
+aliasmap["develop-php7.1"]="develop"
 
 array=( $(echo ${aliasmap[$DOCKER_TAG]}) )
 echo "post_push: use alias list '${aliasmap[$DOCKER_TAG]}'"
