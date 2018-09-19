@@ -12,15 +12,15 @@ The image is automatically rebuilt when the base image [php](https://hub.docker.
 ## 📑️ Table of Contents
 <!-- MarkdownTOC -->
 
-+ [ℹ️ ONA Description](#%E2%84%B9%EF%B8%8F-ona-description)
-+ [🏷 Supported tags](#%F0%9F%8F%B7-supported-tags)
-+ [🛠 Installation](#%F0%9F%9B%A0-installation)
-    - [📀 Get Image](#%F0%9F%93%80-get-image)
-        * [⬇️ Pull from Dockerhub](#%E2%AC%87%EF%B8%8F-pull-from-dockerhub)
-        * [🔨 Manual Building](#%F0%9F%94%A8-manual-building)
-    - [🎽 Create Container](#%F0%9F%8E%BD-create-container)
-    - [🚢 Setup ONA](#%F0%9F%9A%A2-setup-ona)
-+ [💡 Contributing](#%F0%9F%92%A1-contributing)
++ [ℹ️ ONA Description](#-ona-description)
++ [🏷 Supported tags](#-supported-tags)
++ [🛠 Installation](#-installation)
+    - [📀 Get Image](#-get-image)
+        * [⬇️ Pull from Dockerhub](#-pull-from-dockerhub)
+        * [🔨 Manual Building](#-manual-building)
+    - [🎽 Create Container](#-create-container)
+    - [🚢 Setup ONA](#-setup-ona)
++ [💡 Contributing](#-contributing)
 
 <!-- /MarkdownTOC -->
 
