@@ -5,11 +5,11 @@
 
 [![🐋Dockerhub](https://img.shields.io/badge/🐋Dockerhub-🖧raabf/ona-yellow.svg "Dockerhub")](https://hub.docker.com/r/raabf/ona) ![docker stars](https://img.shields.io/docker/stars/raabf/ona.svg) ![docker pulls](https://img.shields.io/docker/pulls/raabf/ona.svg)
 
-[![Dockerfile](https://img.shields.io/badge/📁-Dockerfile-orange.svg)](https://gitlab.com/raabf/ona-docker/blob/master/ona/Dockerfile "Dockerfile") [![microbadger commit](https://images.microbadger.com/badges/commit/raabf/ona.svg)](https://gitlab.com/raabf/ona/ "Repository")
+[![Dockerfile](https://img.shields.io/badge/🗎-Dockerfile-orange.svg)](https://gitlab.com/raabf/ona-docker/blob/master/ona/Dockerfile "Dockerfile") [![microbadger commit](https://images.microbadger.com/badges/commit/raabf/ona.svg)](https://gitlab.com/raabf/ona/ "Repository")
 
 The image is automatically rebuilt when the base image [php](https://hub.docker.com/_/php/) is pushed.
 
-## 🗂️ Table of Contents
+## 📑️ Table of Contents
 <!-- MarkdownTOC -->
 
 + [ℹ️ ONA Description](#%E2%84%B9%EF%B8%8F-ona-description)
@@ -80,7 +80,7 @@ Execute the following
     docker run --detach --publish 0.0.0.0:8666:80 -v /etc/ona/local/:/opt/ona/www/local -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro raabf/ona:latest
 
  + `--publish 0.0.0.0:8666:80` ONA is reachable at the interface `0.0.0.0` (=any) and the port `8666`. Adapt to your needs.
- + `-v /etc/ona/local/:/opt/ona/www/local` (Optional) `/etc/ona/local/`` is the configuration directory of your ONA instance and the path must already exist. It must be a permanent storage. If omitted docker will create an own directory (use `docker inspect` to find out this directory).
+ + `-v /etc/ona/local/:/opt/ona/www/local` (Optional) `/etc/ona/local/` is the configuration directory of your ONA instance and the path must already exist. It must be a permanent storage. If omitted docker will create an own directory (use `docker inspect` to find out this directory).
  + `-v /etc/timezone:/etc/timezone:ro` `-v /etc/localtime:/etc/localtime:ro` timezone information required by PHP
  + `raabf/ona:latest` The image pulled earlier.
 
