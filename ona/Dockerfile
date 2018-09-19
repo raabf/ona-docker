@@ -22,7 +22,7 @@ LABEL maintainer="Fabian Raab <fabian@raab.link>" \
       org.label-schema.url="http://opennetadmin.com/" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/raabf/ona-docker.git" \
-      org.label-schema.docker.cmd="TODO" \
+      org.label-schema.docker.cmd="docker run --detach --publish 0.0.0.0:8666:80 -v /etc/ona/local/:/opt/ona/www/local -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro" \
       org.label-schema.schema-version="1.0"
 
 ENV DEBIAN_FRONTEND noninteractive
