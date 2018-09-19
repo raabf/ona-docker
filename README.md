@@ -58,6 +58,8 @@ OpenNetAdmin provides a database managed inventory of your IP network. Each subn
 
 ### 📀 Get Image
 
+Pull the image or built it manually.
+
 #### ⬇️ Pull from Dockerhub
 
 Pull from Dockerhub. The tag `latest` can be replaced by any of the „Supported tags“ section:
