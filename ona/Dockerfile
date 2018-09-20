@@ -31,6 +31,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
     sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+
 # Install dependencies and dev packeges to build php extensions
 RUN apt-get update && \
     apt-get install --quiet --yes \
@@ -48,10 +50,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/local/include/  && \
     docker-php-ext-install mcrypt && \
     docker-php-ext-install opcache mysqli pdo_mysql  && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
-    docker-php-ext-install ldap && \
-    echo "output_buffering = 4096" > /usr/local/etc/php/conf.d/output.ini
-# output_buffering is to prevent the following error:
-# Warning: session_start(): Cannot send session cookie - headers already sent by …
+    docker-php-ext-install ldap
 
 # Download an install ONA
 WORKDIR $ONA_ROOT
