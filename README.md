@@ -20,6 +20,7 @@ The image is automatically rebuilt when the base image [php](https://hub.docker.
         * [🔨 Manual Building](#-manual-building)
     - [🎽 Create Container](#-create-container)
     - [🚢 Setup ONA](#-setup-ona)
+    - [🔀 Proxying Container](#-proxying-container)
 + [💡 Contributing](#-contributing)
 
 <!-- /MarkdownTOC -->
@@ -100,12 +101,27 @@ Now restart your container to apply changes:
     
     docker restart PASTE_CONTAINER_NAME_HERE
 
-ONA is now reachable at [http://localhost:8666/](http://localhost:8666/)
+ONA is now reachable at [http://localhost:8666/ona](http://localhost:8666/ona)
 
 Note that this image is shipped without a database. Use either an MySQL/MariaDB instance running at your host or use an [MariaDB Docker](https://hub.docker.com/_/mariadb/) image.
 
 Now follow the normal [ONA Web Installation guide](https://github.com/opennetadmin/ona/wiki/Install#web-install-method) to complete your setup. 
 
+### 🔀 Proxying Container
+
+If you plan to proxy your container trough another webserver such at your host, please note that the same base-subdirectory has to be used. This docker image is configured to use `ona/` as subdirectory. To modify this default, edit [`ona/apache2.conf`](https://gitlab.com/raabf/ona-docker/blob/master/ona/apache2.conf) and build the image on your own.
+
+A suitable proxy directive for your host-apache2 instance could look like this:
+
+    ProxyPass /ona http://localhost:8666/ona/
+    ProxyPassReverse /ona http://localhost:8666/ona/
+
+    <Proxy http://localhost:8666/>
+        RequestHeader set Origin http://localhost:8666
+        Require all granted
+    </Proxy>
+
+It is also possible to omit `--publish 0.0.0.0:8666:80` when the container is created and then directly point to the container IP with port 80 (for example `http://172.17.0.1:80` instead of `http://localhost:8666/`). Use `docker inspect` to get the container’s IP address.
 
 ## 💡 Contributing
 
