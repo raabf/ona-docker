@@ -7,7 +7,7 @@ ARG ONA_VERSION=master
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV ONA_ROOT /opt/ona
-ENV APACHE_DOCUMENT_ROOT $ONA_ROOT/www
+ENV APACHE_DOCUMENT_ROOT /var/www/html/
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -31,7 +31,11 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
     sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+COPY ./apache2.conf /etc/apache2/conf-available/ona.conf
+
+RUN a2enconf ona.conf && \
+    mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+
 
 # Install dependencies and dev packeges to build php extensions
 RUN apt-get update && \
