@@ -36,7 +36,7 @@ RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 # Install dependencies and dev packeges to build php extensions
 RUN apt-get update && \
     apt-get install --quiet --yes \
-    libgmp-dev re2c libmhash-dev libmcrypt-dev libldap2-dev nmap iputils-ping unzip dnsutils file && \
+    libgmp-dev re2c libmcrypt-dev libldap2-dev nmap iputils-ping unzip dnsutils file && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /usr/share/doc/* && \
