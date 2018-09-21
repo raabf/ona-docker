@@ -29,6 +29,12 @@ echo "build hook: ONA_VERSION '$ONA_VERSION'"
 
 build_args=''
 
+# This will fetch the commit hash of ONA_VERSION. If ONA_VERSION is already a
+# commit hash, it will fetch the full length. Note that there are multiple "sha"
+# fileds in the json return, and it is assumed that the commit sha is the firt
+# result. xargs will trim whitespaces.
+APP_VCS_REF="$(curl --silent https://api.github.com/repos/opennetadmin/ona/commits/master | sed -En 's/"sha": "(.*)",/\1/p' | head --lines=1 | xargs)"
+
 if [ "$php_included" == "php" ]; then
     build_args=(${build_args} --build-arg PHP_VERSION="$PHP_VERSION")
 fi
@@ -37,5 +43,6 @@ docker build --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
             --build-arg VCS_REF=$(git rev-parse --short HEAD) \
             ${build_args[@]} \
             --build-arg ONA_VERSION="$ONA_VERSION" \
+            --build-arg APP_VCS_REF="$APP_VCS_REF" \
             -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 

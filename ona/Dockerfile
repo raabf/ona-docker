@@ -12,10 +12,14 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
 ARG VCS_REF
+ARG APP_VCS_REF
 
 LABEL maintainer="Fabian Raab <fabian@raab.link>" \
       ona-version="$ONA_VERSION" \
       php-version="$PHP_VERSION" \
+      app-vcs-url="https://github.com/opennetadmin/ona" \
+      app-vcs-ref="$APP_VCS_REF" \
+      vcs-url-orig="https://gitlab.com/raabf/ona-docker.git" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="ona-docker" \
       org.label-schema.description="OpenNetAdmin (ONA) IP Address Management (IPAM) tool" \
@@ -66,7 +70,7 @@ RUN curl -L https://github.com/opennetadmin/ona/archive/$ONA_VERSION.tar.gz | ta
     chown --recursive --verbose www-data:www-data ./www/local /var/log/ona.log
 
 # Optional: For php debugging
-RUN echo "<?php phpinfo(); ?>" > ./www/phpinfo.php
+#RUN echo "<?php phpinfo(); ?>" > ./www/phpinfo.php
 
 # Script to initialize local config for the docker volume.
 # Run it after creating a new container.
