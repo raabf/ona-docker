@@ -51,14 +51,19 @@ RUN apt-get update && \
     rm -rf /tmp/*
 
 # Install requered php extensions
-RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/local/include/  && \
-    docker-php-ext-configure gmp  && \
+RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/local/include/ && \
+    docker-php-ext-configure gmp && \
     docker-php-ext-install gmp && \
-    docker-php-ext-configure mcrypt  && \
-    docker-php-ext-install mcrypt && \
-    docker-php-ext-install opcache mysqli pdo_mysql  && \
+    docker-php-ext-install opcache mysqli pdo_mysql && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-install ldap
+
+# mcrypt is built in in php7.2 onwards, so we do not install in in this case
+RUN lowest=$(echo "7.2\n${PHP_VERSION}" | sort --version-sort | head --lines=1); \
+    if [ "7.2" != "$lowest" ]; then \
+        docker-php-ext-configure mcrypt  && \
+        docker-php-ext-install mcrypt; \
+    fi
 
 # Download an install ONA
 WORKDIR $ONA_ROOT
