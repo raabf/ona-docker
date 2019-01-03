@@ -1,7 +1,7 @@
 🐳🖧 OpenNetAdmin (ONA) Docker
 =====================================
 
-[![docker automated](https://img.shields.io/docker/automated/raabf/latex-versions.svg)](https://hub.docker.com/r/raabf/ona) [![maintained](https://img.shields.io/maintenance/yes/2018.svg)](https://gitlab.com/raabf) [![licence](https://img.shields.io/github/license/raabf/ona-docker.svg)](https://gitlab.com/raabf/ona-docker/blob/master/LICENSE) 
+[![docker automated](https://img.shields.io/docker/automated/raabf/latex-versions.svg)](https://hub.docker.com/r/raabf/ona) [![maintained](https://img.shields.io/maintenance/yes/2019.svg)](https://gitlab.com/raabf) [![licence](https://img.shields.io/github/license/raabf/ona-docker.svg)](https://gitlab.com/raabf/ona-docker/blob/master/LICENSE) 
 
 [![🐋Dockerhub](https://img.shields.io/badge/🐋Dockerhub-🖧raabf/ona-yellow.svg "Dockerhub") ![docker stars](https://img.shields.io/docker/stars/raabf/ona.svg) ![docker pulls](https://img.shields.io/docker/pulls/raabf/ona.svg)](https://hub.docker.com/r/raabf/ona)
 
